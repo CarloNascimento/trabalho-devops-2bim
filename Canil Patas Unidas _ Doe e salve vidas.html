@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Canil Patas Unidas | Doe e salve vidas</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff8ec;--card:#fff;--ink:#22284a;--dim:#5b6285;--sun:#ffc93c;--sun-ink:#3a2a00;--leaf:#1f8a63;--rose:#ff5d73;--soft:#ffeccb;--line:#f0dfc0;color-scheme:light dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141830;--card:#1d2347;--ink:#f4f1ff;--dim:#a9b0d6;--soft:#262d58;--line:#323b72;--leaf:#4fd1a1}}
+:root[data-theme="dark"]{--bg:#141830;--card:#1d2347;--ink:#f4f1ff;--dim:#a9b0d6;--soft:#262d58;--line:#323b72;--leaf:#4fd1a1}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 Nunito,system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:"Baloo 2",system-ui,sans-serif;line-height:1.08;margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+section{padding:72px 0}
+h2{font-size:clamp(30px,5vw,46px);font-weight:800;margin-bottom:12px}
+.lead{color:var(--dim);max-width:60ch;margin:0 0 32px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:800 17px Nunito,sans-serif;border:0;border-radius:999px;padding:15px 28px;cursor:pointer;text-decoration:none;transition:transform .15s}
+.btn:active{transform:scale(.97)}
+.btn:focus-visible,.chip:focus-visible,input:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+.pri{background:var(--sun);color:var(--sun-ink);box-shadow:0 5px 0 #d79d00}
+.sec{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--line)}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.logo{font:800 22px "Baloo 2",sans-serif;display:flex;align-items:center;gap:8px}
+.logo svg{width:34px;height:34px}
+/* hero */
+.hero{padding:20px 0 70px}
+.hg{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
+h1{font-size:clamp(40px,7vw,76px);font-weight:800;letter-spacing:-.01em}
+h1 em{font-style:normal;color:var(--rose)}
+.hero p{font-size:19px;color:var(--dim);max-width:46ch;margin:18px 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:14px}
+.dogwrap{position:relative;max-width:420px;margin:0 auto;width:100%}
+.dogwrap svg{width:100%;height:auto;display:block;filter:drop-shadow(0 18px 0 rgba(0,0,0,.06))}
+.bubble{position:absolute;top:2%;right:-2%;background:var(--card);border-radius:20px 20px 20px 4px;padding:10px 16px;font:800 17px "Baloo 2",sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.12);transform:rotate(4deg);transition:transform .2s}
+.bubble.pop{transform:rotate(-3deg) scale(1.12)}
+.hint{text-align:center;font-size:14px;color:var(--dim);margin-top:6px}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stat{background:var(--card);border-radius:24px;padding:22px;box-shadow:inset 0 0 0 2px var(--line)}
+.stat b{display:block;font:800 clamp(34px,5vw,52px) "Baloo 2",sans-serif;color:var(--leaf);line-height:1}
+.stat span{color:var(--dim);font-size:15px}
+/* dogs */
+.dogs{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.dog{background:var(--card);border-radius:28px;padding:18px;box-shadow:inset 0 0 0 2px var(--line);display:flex;flex-direction:column;transition:transform .2s}
+.dog:hover{transform:translateY(-6px) rotate(-1deg)}
+.dog .pic{background:var(--soft);border-radius:20px;padding:10px 24px 0}
+.dog svg{width:100%;height:auto;display:block}
+.dog h3{font-size:26px;margin:14px 0 2px}
+.dog small{color:var(--rose);font-weight:800}
+.dog p{font-size:15px;color:var(--dim);margin:8px 0 16px;flex:1}
+.dog .btn{justify-content:center;padding:11px 16px;font-size:15px}
+/* donate */
+.don{background:var(--ink);color:#fff;border-radius:40px;padding:clamp(26px,5vw,56px);display:grid;grid-template-columns:1fr 1fr;gap:36px}
+:root[data-theme="dark"] .don,.don{--dc:#fff}
+.don h2{color:#fff}
+.don .lead{color:#c9cdea}
+.tg{display:inline-flex;background:rgba(255,255,255,.12);border-radius:999px;padding:4px;margin-bottom:18px}
+.tg button{font:800 15px Nunito,sans-serif;border:0;background:transparent;color:#fff;padding:9px 20px;border-radius:999px;cursor:pointer}
+.tg button[aria-pressed=true]{background:var(--sun);color:var(--sun-ink)}
+.chips{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.chip{font:800 24px "Baloo 2",sans-serif;background:rgba(255,255,255,.1);color:#fff;border:2px solid transparent;border-radius:20px;padding:14px;cursor:pointer;transition:.15s}
+.chip[aria-pressed=true]{background:#fff;color:#22284a;border-color:var(--sun);transform:scale(1.04)}
+.impact{margin-top:18px;background:rgba(255,255,255,.1);border-radius:20px;padding:18px;min-height:96px;font-size:18px}
+.impact b{color:var(--sun)}
+.pix{background:#fff;color:#22284a;border-radius:28px;padding:28px;align-self:start}
+.pix h3{font-size:26px}
+.key{display:flex;gap:10px;align-items:center;background:#fff3d6;border-radius:16px;padding:12px 14px;margin:16px 0;font-weight:800;word-break:break-all}
+.key code{flex:1;font:inherit;font-size:15px}
+.pix .btn{width:100%;justify-content:center}
+.pix p{font-size:14px;color:#5b6285;margin:12px 0 0}
+.goal{margin-top:30px}
+.bar{height:20px;background:rgba(255,255,255,.14);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sun),var(--rose));border-radius:99px;transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
+.goal div.r{display:flex;justify-content:space-between;font-weight:800;margin-top:8px;font-size:15px;gap:10px}
+/* ways */
+.ways{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.way{background:var(--card);border-radius:28px;padding:26px;box-shadow:inset 0 0 0 2px var(--line)}
+.way .ic{font-size:38px}
+.way h3{font-size:24px;margin:8px 0}
+.way p{color:var(--dim);margin:0 0 14px;font-size:16px}
+.way a{color:var(--rose);font-weight:800}
+.story{background:var(--soft);border-radius:36px;padding:clamp(26px,5vw,52px);font-size:clamp(19px,2.4vw,24px);font-family:"Baloo 2",sans-serif;font-weight:600;line-height:1.35}
+.story small{display:block;font:700 15px Nunito,sans-serif;color:var(--dim);margin-top:14px}
+footer{padding:40px 0 110px;color:var(--dim);font-size:14px;text-align:center}
+.float{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:5;transform:translateY(140%);transition:transform .3s}
+.float.on{transform:none}
+.toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:99px;font-weight:800;opacity:0;pointer-events:none;transition:.3s;z-index:9;box-shadow:0 8px 30px rgba(0,0,0,.3)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:900px){.hg,.don{grid-template-columns:1fr}.stats,.dogs{grid-template-columns:repeat(2,1fr)}.ways{grid-template-columns:1fr}section{padding:54px 0}.dogwrap{max-width:320px}}
+@media(max-width:480px){.dogs{grid-template-columns:1fr}.stat{padding:16px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+@keyframes wag{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(16deg)}}
+.tail{transform-origin:0 100%;transform-box:fill-box;animation:wag .5s infinite}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="dg" viewBox="0 0 200 200">
+<path style="fill:var(--ear)" d="M40 58C8 68 4 134 30 156C54 154 64 112 62 68Z"/>
+<path style="fill:var(--ear)" d="M160 58C192 68 196 134 170 156C146 154 136 112 138 68Z"/>
+<ellipse style="fill:var(--fur)" cx="100" cy="106" rx="66" ry="62"/>
+<ellipse style="fill:var(--patch)" cx="128" cy="90" rx="22" ry="22"/>
+<ellipse style="fill:var(--muz)" cx="100" cy="138" rx="36" ry="27"/>
+<path style="fill:#2b1d1d" d="M86 124Q100 114 114 124Q107 140 100 140Q93 140 86 124Z"/>
+<path style="fill:#ff7b8a" d="M90 148Q100 172 110 148Z"/>
+<path style="fill:none;stroke:#2b1d1d;stroke-width:3.5;stroke-linecap:round" d="M100 140V150M100 150Q90 156 83 148M100 150Q110 156 117 148"/>
+</symbol>
+<symbol id="eyes" viewBox="0 0 200 200"><g fill="#2b1d1d"><circle cx="72" cy="94" r="10"/><circle cx="128" cy="94" r="10"/></g><g fill="#fff"><circle cx="75" cy="90" r="3.6"/><circle cx="131" cy="90" r="3.6"/></g></symbol>
+</svg>
+
+<div class="wrap">
+<nav><div class="logo"><svg viewBox="0 0 200 200" style="--fur:#e0a35c;--ear:#9a5f25;--muz:#f6dcb8;--patch:#e0a35c"><use href="#dg"/><use href="#eyes"/></svg>Patas Unidas</div><a class="btn sec" href="#doar" style="padding:10px 20px;font-size:15px">Quero doar</a></nav>
+
+<header class="hero"><div class="hg">
+<div>
+<h1>Eles não pediram para ser <em>abandonados.</em><br>Mas você pode pedir por eles.</h1>
+<p>Somos um grupo de voluntários que cuida de 48 cães resgatados das ruas. Não temos patrocínio, só gente que acorda cedo para dar comida. Cada real vira ração, vacina e uma segunda chance.</p>
+<div class="cta"><a class="btn pri" href="#doar">Doar agora</a><a class="btn sec" href="#caes">Conhecer os cães</a></div>
+</div>
+<div><div class="dogwrap" id="hd">
+<div class="bubble" id="bub">Au! Oi!</div>
+<svg viewBox="0 0 200 200" style="--fur:#d99a52;--ear:#8f5522;--muz:#f6dcb8;--patch:#d99a52" role="img" aria-label="Cachorro caramelo olhando para você"><use href="#dg"/><g id="ey"><use href="#eyes"/></g></svg>
+</div><div class="hint">Passe o mouse ou o dedo: ele te acompanha. Toque nele!</div></div>
+</div></header>
+</div>
+
+<section style="padding-top:0"><div class="wrap"><div class="stats">
+<div class="stat"><b data-n="48">0</b><span>cães sob nossos cuidados</span></div>
+<div class="stat"><b data-n="213">0</b><span>adotados desde 2019</span></div>
+<div class="stat"><b data-n="26">0</b><span>voluntários toda semana</span></div>
+<div class="stat"><b data-n="100">0%</b><span>do valor vai para os cães</span></div>
+</div></div></section>
+
+<section id="caes"><div class="wrap">
+<h2>Eles estão esperando por você</h2>
+<p class="lead">Você pode adotar, ou apadrinhar: ajudar a pagar a ração e os cuidados de um deles todos os meses, mesmo que ele continue morando no canil.</p>
+<div class="dogs">
+<article class="dog"><div class="pic"><svg viewBox="0 0 200 200" style="--fur:#6b4a34;--ear:#3d281a;--muz:#e8c9a3;--patch:#6b4a34"><use href="#dg"/><use href="#eyes"/></svg></div><h3>Thor</h3><small>3 anos, porte grande</small><p>Foi achado amarrado numa estrada. Desconfiou de todo mundo por um mês. Hoje deita no colo de quem chega.</p><button class="btn pri sp" data-dog="Thor">Apadrinhar o Thor</button></article>
+<article class="dog"><div class="pic"><svg viewBox="0 0 200 200" style="--fur:#f1e6d2;--ear:#c9a878;--muz:#fff6e6;--patch:#c9a878"><use href="#dg"/><use href="#eyes"/></svg></div><h3>Mel</h3><small>8 meses, porte médio</small><p>Nasceu na rua e chegou com a ninhada inteira. É a última que falta ser adotada e adora brincar de bola.</p><button class="btn pri sp" data-dog="Mel">Apadrinhar a Mel</button></article>
+<article class="dog"><div class="pic"><svg viewBox="0 0 200 200" style="--fur:#3a3f58;--ear:#1f2336;--muz:#aeb4cc;--patch:#1f2336"><use href="#dg"/><use href="#eyes"/></svg></div><h3>Pipoca</h3><small>11 anos, porte pequeno</small><p>Idosinha que perdeu a casa quando a tutora faleceu. Precisa de remédio diário e de muito carinho no fim da vida.</p><button class="btn pri sp" data-dog="Pipoca">Apadrinhar a Pipoca</button></article>
+<article class="dog"><div class="pic"><svg viewBox="0 0 200 200" style="--fur:#e9b04a;--ear:#b57a1c;--muz:#fbe3ae;--patch:#fff3d8"><use href="#dg"/><use href="#eyes"/></svg></div><h3>Bolinha</h3><small>2 anos, porte médio</small><p>Atropelado e operado graças a doações como a sua. Anda com um jeitinho torto e corre atrás de todo mundo.</p><button class="btn pri sp" data-dog="Bolinha">Apadrinhar o Bolinha</button></article>
+</div></div></section>
+
+<section id="doar" style="padding-top:20px"><div class="wrap"><div class="don">
+<div>
+<h2>Quanto vale uma vida?<br>Comece com R$ 20.</h2>
+<p class="lead">Escolha um valor e veja o que ele faz acontecer.</p>
+<div class="tg" role="group" aria-label="Frequência"><button id="once" aria-pressed="false">Só uma vez</button><button id="month" aria-pressed="true">Todo mês</button></div>
+<div class="chips" id="chips"></div>
+<div class="impact" id="imp" aria-live="polite"></div>
+</div>
+<div>
+<div class="pix"><h3>Doe por Pix</h3><p style="margin:4px 0 0">Sem taxas. Cai direto na conta do canil.</p>
+<div class="key"><code id="pk">doe@patasunidas.org</code></div>
+<button class="btn pri" id="cp">Copiar chave Pix</button>
+<p id="msg">Depois, mande o comprovante no WhatsApp e a gente te conta como ajudou.</p></div>
+<div class="goal"><div class="bar"><i id="bar"></i></div><div class="r"><span>Meta do mês: R$ 4.000</span><span id="pc">0%</span></div><p style="color:#c9cdea;font-size:14px;margin:6px 0 0">Já arrecadamos R$ 2.650 para ração, vacinas e remédios.</p></div>
+</div>
+</div></div></section>
+
+<section><div class="wrap">
+<h2>Sem dinheiro? Também dá pra ajudar</h2>
+<p class="lead">Tem muita coisa que não aparece no extrato e que muda o dia de um cão.</p>
+<div class="ways">
+<div class="way"><div class="ic">🥣</div><h3>Doe ração e cobertores</h3><p>Aceitamos ração, areia, cobertores, medicamentos e produtos de limpeza. Retiramos na sua porta.</p><a href="https://wa.me/5500000000000?text=Quero%20doar%20itens%20para%20o%20canil" target="_blank" rel="noopener">Combinar a retirada</a></div>
+<div class="way"><div class="ic">🏠</div><h3>Seja lar temporário</h3><p>Acolha um cão por algumas semanas até ele achar uma família. A gente paga ração e veterinário.</p><a href="https://wa.me/5500000000000?text=Quero%20ser%20lar%20tempor%C3%A1rio" target="_blank" rel="noopener">Quero acolher</a></div>
+<div class="way"><div class="ic">📣</div><h3>Compartilhe este site</h3><p>Uma mensagem sua pode chegar na pessoa certa. Mande para três amigos hoje.</p><a href="#" id="sh">Compartilhar</a></div>
+</div></div></section>
+
+<section style="padding-top:0"><div class="wrap"><div class="story">“A Pipoca chegou pesando 3 quilos e sem querer comer. Hoje pesa 7 e late quando ouve o portão. Foi ração, remédio e colo, e tudo isso veio de gente que a gente nunca viu.”<small>Ana, fundadora e voluntária desde 2019</small></div></div></section>
+
+<footer><div class="wrap">Canil Patas Unidas, mantido 100% por voluntários e doações.<br>Substitua os dados de exemplo (chave Pix, telefone e valores) pelos reais antes de publicar.</div></footer>
+
+<a class="btn pri float" id="fl" href="#doar">Doar agora</a>
+<div class="toast" id="ts" role="status"></div>
+
+<script>
+(()=>{
+const $=s=>document.querySelector(s),ts=$('#ts');
+function toast(m){ts.textContent=m;ts.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>ts.classList.remove('on'),2400)}
+/* olhos que seguem */
+const ey=$('#ey'),hd=$('#hd'),bub=$('#bub');
+function look(e){const r=hd.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height*.5,a=Math.atan2(e.clientY-cy,e.clientX-cx),d=Math.min(Math.hypot(e.clientX-cx,e.clientY-cy)/40,7);ey.style.transform='translate('+Math.cos(a)*d+'px,'+Math.sin(a)*d+'px)'}
+addEventListener('pointermove',look);addEventListener('pointerdown',look);
+const talk=['Au! Oi!','Me leva pra casa?','Tô com fome...','Obrigado!','Você é demais!','Quer brincar?'];let ti=0;
+hd.addEventListener('click',()=>{ti=(ti+1)%talk.length;bub.textContent=talk[ti];bub.classList.add('pop');setTimeout(()=>bub.classList.remove('pop'),220)});
+hd.style.cursor='pointer';
+/* contadores e barra */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;io.unobserve(e.target);const el=e.target,n=+el.dataset.n,suf=el.textContent.includes('%')?'%':'';let s=null;(function f(t){s=s||t;const p=Math.min((t-s)/1400,1);el.textContent=Math.round(n*(1-Math.pow(1-p,3)))+suf;if(p<1)requestAnimationFrame(f)})(performance.now())}),{threshold:.6});
+document.querySelectorAll('[data-n]').forEach(e=>io.observe(e));
+const io2=new IntersectionObserver(es=>{if(es[0].isIntersecting){$('#bar').style.width='66%';$('#pc').textContent='66%'}},{threshold:.5});io2.observe($('#bar'));
+/* doação */
+const vals=[20,50,100,200];let sel=1,mo=true;
+const imp=v=>({20:['1 semana de ração para 1 cão','Ração é o que mais pesa no nosso mês.'],50:['3 semanas de ração para 1 cão','Ou vacina e vermífugo para um filhote.'],100:['1 mês inteiro de ração e remédios para 1 cão','Você vira padrinho de verdade.'],200:['Ajuda a pagar a castração de 1 cão','Evita ninhadas e muda o futuro da rua.']})[v];
+const ch=$('#chips');
+function draw(){ch.innerHTML='';vals.forEach((v,i)=>{const b=document.createElement('button');b.className='chip';b.textContent='R$ '+v;b.setAttribute('aria-pressed',i===sel);b.onclick=()=>{sel=i;draw()};ch.appendChild(b)});const v=vals[sel],t=imp(v);
+$('#imp').innerHTML='<b>R$ '+v+(mo?' por mês':'')+'</b> = '+t[0]+'.<br><span style="color:#c9cdea;font-size:15px">'+t[1]+(mo?' Em um ano, são R$ '+v*12+' de cuidado.':'')+' (valores aproximados)</span>'}
+function tog(m){mo=m;$('#month').setAttribute('aria-pressed',m);$('#once').setAttribute('aria-pressed',!m);draw()}
+$('#month').onclick=()=>tog(true);$('#once').onclick=()=>tog(false);draw();
+$('#cp').onclick=async()=>{const k=$('#pk').textContent;try{await navigator.clipboard.writeText(k);toast('Chave Pix copiada. Obrigado!')}catch(e){const r=document.createRange();r.selectNodeContents($('#pk'));getSelection().removeAllRanges();getSelection().addRange(r);toast('Selecione e copie a chave')}};
+document.querySelectorAll('.sp').forEach(b=>b.onclick=()=>{sel=2;tog(true);$('#doar').scrollIntoView();toast('Obrigado por apadrinhar '+b.dataset.dog+'! Escreva o nome dele no comprovante.')});
+$('#sh').onclick=async e=>{e.preventDefault();const d={title:'Canil Patas Unidas',text:'Ajude os cães do Canil Patas Unidas',url:location.href};if(navigator.share){try{await navigator.share(d)}catch(_){}}else{try{await navigator.clipboard.writeText(location.href);toast('Link copiado!')}catch(_){toast('Copie o endereço da página')}}};
+/* botão flutuante */
+const fl=$('#fl'),dn=$('#doar');
+function sc(){const r=dn.getBoundingClientRect();fl.classList.toggle('on',scrollY>500&&!(r.top<innerHeight&&r.bottom>0))}
+addEventListener('scroll',sc,{passive:true});sc();
+})();
+</script>
+</body>
+</html>
