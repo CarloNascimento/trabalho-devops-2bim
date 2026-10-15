@@ -1,0 +1,177 @@
+name: Changelog
+
+on:
+  push:
+    branches: [main, master]
+    paths-ignore:
+      - CHANGELOG.md
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (histórico completo)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Gerar changelog
+        run: |
+          python - --latest <<'PY'
+          """Gera o CHANGELOG.md a partir do histórico git (Conventional Commits).
+
+          Formato inspirado em Keep a Changelog (https://keepachangelog.com/pt-BR/).
+
+          Uso:
+              python scripts/generate_changelog.py            # gera CHANGELOG.md
+              python scripts/generate_changelog.py --latest   # gera também RELEASE_NOTES.md
+          """
+          import os
+          import re
+          import subprocess
+          import sys
+          from collections import Counter, OrderedDict
+          from datetime import date
+
+          REPO = os.getenv("GITHUB_REPOSITORY", "")
+          URL = f"https://github.com/{REPO}" if REPO else ""
+
+          TYPES = OrderedDict([
+              ("feat", "Adicionado"),
+              ("fix", "Corrigido"),
+              ("perf", "Desempenho"),
+              ("refactor", "Refatoração"),
+              ("docs", "Documentação"),
+              ("style", "Estilo"),
+              ("test", "Testes"),
+              ("build", "Build"),
+              ("ci", "Integração contínua"),
+              ("chore", "Manutenção"),
+              ("revert", "Revertido"),
+              ("other", "Outras alterações"),
+          ])
+          ALIASES = {"feature": "feat", "bugfix": "fix", "hotfix": "fix", "doc": "docs", "tests": "test"}
+          PATTERN = re.compile(r"^(\w+)(?:\(([^)]+)\))?(!)?:\s*(.+)$")
+          SKIP = re.compile(r"\[skip ci\]|^chore\(changelog\)", re.I)
+
+
+          def git(*args):
+              return subprocess.run(["git", *args], capture_output=True, text=True, check=True).stdout.strip()
+
+
+          def get_commits(rev_range):
+              fmt = "%H%x1f%h%x1f%an%x1f%s%x1f%b%x1e"
+              out = git("log", "--no-merges", f"--pretty=format:{fmt}", rev_range)
+              commits = []
+              for raw in filter(None, out.split("\x1e")):
+                  full, short, author, subject, body = (raw.strip("\n").split("\x1f") + [""] * 5)[:5]
+                  if SKIP.search(subject):
+                      continue
+                  ctype, scope, bang, desc = "other", None, None, subject
+                  m = PATTERN.match(subject)
+                  if m:
+                      t, s, b, d = m.groups()
+                      t = ALIASES.get(t.lower(), t.lower())
+                      if t in TYPES:
+                          ctype, scope, bang, desc = t, s, b, d
+                  commits.append(dict(hash=full, short=short, author=author, type=ctype, scope=scope,
+                                      desc=desc[:1].upper() + desc[1:],
+                                      breaking=bool(bang) or "BREAKING CHANGE" in body))
+              return commits
+
+
+          def entry(c):
+              scope = f"**{c['scope']}**: " if c["scope"] else ""
+              ref = f"([{c['short']}]({URL}/commit/{c['hash']}))" if URL else f"({c['short']})"
+              return f"- {scope}{c['desc']} {ref}"
+
+
+          def render_section(title, day, commits):
+              head = f"## {title}" + (f" - {day}" if day else "")
+              out = [head, ""]
+              if not commits:
+                  return out + ["Nenhuma alteração registrada.", ""]
+
+              breaking = [c for c in commits if c["breaking"]]
+              if breaking:
+                  out += ["### Alterações incompatíveis", ""] + [entry(c) for c in breaking] + [""]
+
+              for key, label in TYPES.items():
+                  group = [c for c in commits if c["type"] == key and not c["breaking"]]
+                  if group:
+                      out += [f"### {label}", ""] + [entry(c) for c in group] + [""]
+              return out
+
+
+          def main():
+              tags = git("tag", "--sort=-creatordate").splitlines()
+              sections = []  # (titulo, data, commits)
+              links = []
+
+              unreleased = get_commits(f"{tags[0]}..HEAD" if tags else "HEAD")
+              if unreleased or not tags:
+                  sections.append(("[Não lançado]", None, unreleased))
+                  if tags and URL:
+                      links.append(f"[Não lançado]: {URL}/compare/{tags[0]}...HEAD")
+
+              for i, tag in enumerate(tags):
+                  prev = tags[i + 1] if i + 1 < len(tags) else None
+                  day = git("log", "-1", "--format=%ad", "--date=short", tag)
+                  sections.append((f"[{tag}]", day, get_commits(f"{prev}..{tag}" if prev else tag)))
+                  if URL:
+                      links.append(f"[{tag}]: {URL}/compare/{prev}...{tag}" if prev
+                                   else f"[{tag}]: {URL}/releases/tag/{tag}")
+
+              all_commits = [c for s in sections for c in s[2]]
+              authors = Counter(c["author"] for c in all_commits)
+
+              md = ["# Changelog", "",
+                    "Registro das alterações do projeto, gerado automaticamente a partir do histórico do git.",
+                    "As mensagens de commit seguem a convenção "
+                    "[Conventional Commits](https://www.conventionalcommits.org/pt-br/).", ""]
+              for title, day, commits in sections:
+                  md += render_section(title, day, commits)
+
+              if authors:
+                  md += ["## Contribuidores", ""]
+                  md += [f"- {a} ({n} commit{'s' if n > 1 else ''})" for a, n in authors.most_common()]
+                  md += [""]
+              if links:
+                  md += links + [""]
+
+              with open("CHANGELOG.md", "w", encoding="utf-8") as f:
+                  f.write("\n".join(md))
+              print(f"CHANGELOG.md gerado: {len(all_commits)} commits em {len(sections)} seção(ões).")
+
+              if "--latest" in sys.argv and sections:
+                  with open("RELEASE_NOTES.md", "w", encoding="utf-8") as f:
+                      f.write("\n".join(render_section(*sections[0])[2:]))
+
+
+          if __name__ == "__main__":
+              main()
+          PY
+
+      - name: Commitar CHANGELOG.md
+        if: github.ref_type == 'branch'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.md
+          git diff --cached --quiet || (git commit -m "chore(changelog): atualiza CHANGELOG.md [skip ci]" && git push)
+
+      - name: Criar release
+        if: github.ref_type == 'tag'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create "$GITHUB_REF_NAME" -F RELEASE_NOTES.md --title "$GITHUB_REF_NAME"
