@@ -7,6 +7,7 @@ As mensagens de commit seguem a convenção [Conventional Commits](https://www.c
 
 ### Outras alterações
 
+- Titulo alterado ([66468e4](https://github.com/CarloNascimento/trabalho-devops-2bim/commit/66468e41d4d95e4b7218ab3e629c76da70de01f5))
 - Add files via upload ([59b197f](https://github.com/CarloNascimento/trabalho-devops-2bim/commit/59b197ffc037825cf9433fad1a00a8fb45cbdc36))
 - Changelog V1 ([e24cf60](https://github.com/CarloNascimento/trabalho-devops-2bim/commit/e24cf60c87670acf587803d6a706974b61968f46))
 - Create helloworld.yml ([373a3e5](https://github.com/CarloNascimento/trabalho-devops-2bim/commit/373a3e5385b3b3850ea83e5e95c09bfee17ff325))
@@ -15,3 +16,4 @@ As mensagens de commit seguem a convenção [Conventional Commits](https://www.c
 ## Contribuidores
 
 - Carlos_.nct (4 commits)
+- Thaina (1 commit)
