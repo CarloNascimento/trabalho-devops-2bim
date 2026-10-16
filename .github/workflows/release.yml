@@ -1,0 +1,33 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Criar pacotes (zip e tar.gz)
+        run: |
+          VERSION="${GITHUB_REF_NAME}"
+          NAME="canil-patas-unidas-${VERSION}"
+          mkdir -p dist
+          zip -r "dist/${NAME}.zip" . -x ".git/*" ".github/*" "dist/*"
+          tar --exclude=".git" --exclude=".github" --exclude="dist" \
+              -czf "dist/${NAME}.tar.gz" .
+
+      - name: Publicar release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Release ${{ github.ref_name }}
+          files: dist/*
+          generate_release_notes: true
