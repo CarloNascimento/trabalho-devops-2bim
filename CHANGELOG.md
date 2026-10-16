@@ -7,6 +7,7 @@ As mensagens de commit seguem a convenção [Conventional Commits](https://www.c
 
 ### Outras alterações
 
+- Add GitHub Actions workflow for automated releases ([bfbdc75](https://github.com/CarloNascimento/trabalho-devops-2bim/commit/bfbdc753bdb222a0f7d98955914d1c8ce6b75772))
 - Valor de inicio alterado ([de2c446](https://github.com/CarloNascimento/trabalho-devops-2bim/commit/de2c446d69529e41f0d200204f2ea2be9a823a58))
 - Titulo alterado ([66468e4](https://github.com/CarloNascimento/trabalho-devops-2bim/commit/66468e41d4d95e4b7218ab3e629c76da70de01f5))
 - Add files via upload ([59b197f](https://github.com/CarloNascimento/trabalho-devops-2bim/commit/59b197ffc037825cf9433fad1a00a8fb45cbdc36))
@@ -17,4 +18,4 @@ As mensagens de commit seguem a convenção [Conventional Commits](https://www.c
 ## Contribuidores
 
 - Carlos_.nct (4 commits)
-- Thaina (2 commits)
+- Thaina (3 commits)
