@@ -7,6 +7,12 @@ As mensagens de commit seguem a convenção [Conventional Commits](https://www.c
 
 ### Outras alterações
 
+- Update README with additional description ([9257f73](https://github.com/CarloNascimento/trabalho-devops-2bim/commit/9257f73df31285747e45a3791bf97f32d193f32e))
+
+## [v1.0.0] - 2026-10-16
+
+### Outras alterações
+
 - Add GitHub Actions workflow for automated releases ([bfbdc75](https://github.com/CarloNascimento/trabalho-devops-2bim/commit/bfbdc753bdb222a0f7d98955914d1c8ce6b75772))
 - Valor de inicio alterado ([de2c446](https://github.com/CarloNascimento/trabalho-devops-2bim/commit/de2c446d69529e41f0d200204f2ea2be9a823a58))
 - Titulo alterado ([66468e4](https://github.com/CarloNascimento/trabalho-devops-2bim/commit/66468e41d4d95e4b7218ab3e629c76da70de01f5))
@@ -17,5 +23,8 @@ As mensagens de commit seguem a convenção [Conventional Commits](https://www.c
 
 ## Contribuidores
 
+- Thaina (4 commits)
 - Carlos_.nct (4 commits)
-- Thaina (3 commits)
+
+[Não lançado]: https://github.com/CarloNascimento/trabalho-devops-2bim/compare/v1.0.0...HEAD
+[v1.0.0]: https://github.com/CarloNascimento/trabalho-devops-2bim/releases/tag/v1.0.0
