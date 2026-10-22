@@ -1,9 +1,9 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - 'v*.*.*'
+  release:
+    types: [published]
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -18,16 +18,15 @@ jobs:
 
       - name: Criar pacotes (zip e tar.gz)
         run: |
-          VERSION="${GITHUB_REF_NAME}"
+          VERSION="${{ github.event.release.tag_name || 'v1.0.0' }}"
           NAME="canil-patas-unidas-${VERSION}"
           mkdir -p dist
           zip -r "dist/${NAME}.zip" . -x ".git/*" ".github/*" "dist/*"
           tar --exclude=".git" --exclude=".github" --exclude="dist" \
               -czf "dist/${NAME}.tar.gz" .
 
-      - name: Publicar release
+      - name: Anexar pacotes na release
         uses: softprops/action-gh-release@v2
         with:
-          name: Release ${{ github.ref_name }}
+          tag_name: ${{ github.event.release.tag_name || 'v1.0.0' }}
           files: dist/*
-          generate_release_notes: true
