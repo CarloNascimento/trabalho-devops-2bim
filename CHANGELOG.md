@@ -7,6 +7,7 @@ As mensagens de commit seguem a convenção [Conventional Commits](https://www.c
 
 ### Outras alterações
 
+- Add line with number 4444 to README ([25c5db4](https://github.com/CarloNascimento/trabalho-devops-2bim/commit/25c5db416638bc34e17380b03df7b01653644eeb))
 - Update README with additional description ([9257f73](https://github.com/CarloNascimento/trabalho-devops-2bim/commit/9257f73df31285747e45a3791bf97f32d193f32e))
 
 ## [v1.0.0] - 2026-10-16
@@ -23,7 +24,7 @@ As mensagens de commit seguem a convenção [Conventional Commits](https://www.c
 
 ## Contribuidores
 
-- Thaina (4 commits)
+- Thaina (5 commits)
 - Carlos_.nct (4 commits)
 
 [Não lançado]: https://github.com/CarloNascimento/trabalho-devops-2bim/compare/v1.0.0...HEAD
